@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Analyse sonore du chant des diamants mandarins">
+    <meta name="author" content="William BOFFY">
+
+    <title>LECD - zebra finches speaks</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+    
+    <!-- Toggle -->
+    <link href="css/toggle.css" rel="stylesheet">
+    
+    <!-- Mon CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        /*Pour gestion en javascript*/
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle" data-toggle="tooltip" data-placement="bottom" title="réglages"><i class="fa fa-cog" aria-hidden="true"></i></a>
+    <a id="mute" class="floatButton mute" data-toggle="tooltip" data-placement="bottom" title="mute?"><i class="fa fa-microphone" aria-hidden="true"></i></a>
+    <a id="play" class="floatButton play" data-toggle="tooltip" data-placement="bottom" title="play?"><i class="fa fa-play" aria-hidden="true"></i></a>
+    <a id="graph" class="floatButton graph" data-toggle="tooltip" data-placement="bottom" title="graphique?"><i class="fa fa-signal" aria-hidden="true"></i></a>
+    <a id="call" class="floatButton call" data-toggle="tooltip" data-placement="bottom" title="appel?"><i class="fa fa-volume-down" aria-hidden="true"></i></a>
+    <div class="margeTop"></div>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="#top" onclick=$("#menu-close").click();>Réglages</a>
+            </li>
+            <!--<li>
+                <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon before">Fréquence min. </div>
+                      <input type="text" class="form-control" id="inputMin" placeholder="fréquence minimum">
+                      <div id="freqMin" class="input-group-addon after"><i class="fa fa-check" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </li>-->
+            <li>
+                <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon before">Fréquence max. </div>
+                      <input type="text" class="form-control" id="inputMax" placeholder="fréquence maximum">
+                      <div id="freqMax" class="input-group-addon after"><i class="fa fa-check" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </li>
+            <!--<li>
+                <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon before">Amplitude min. </div>
+                      <input type="text" class="form-control" id="inputAmpMin" placeholder="amplitude minimum">
+                      <div id="ampMin" class="input-group-addon after"><i class="fa fa-check" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </li>-->
+            <li>
+                <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon before">Amplitude max. </div>
+                      <input type="text" class="form-control" id="inputAmpMax" placeholder="amplitude maximum">
+                      <div id="ampMax" class="input-group-addon after"><i class="fa fa-check" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon before">Probabilité.</div>
+                      <input type="text" class="form-control" id="proba" placeholder="Seuil de syllabe">
+                      <div id="divProba" class="input-group-addon after"><i class="fa fa-check" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </li>
+            <!--
+            <li>
+                <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon before">Seuil Harmoniques</div>
+                      <input type="text" class="form-control" id="harmo" placeholder="Seuil des harmoniques">
+                      <div id="divHarmo" class="input-group-addon after"><i class="fa fa-check" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon before">Seuil ZeroCrossing</div>
+                      <input type="text" class="form-control" id="zeroCross" placeholder="Seuil du ZeroCrossing">
+                      <div id="divZeroCross" class="input-group-addon after"><i class="fa fa-check" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </li>-->
+            <li>
+                <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon before">Lignes</div>
+                      <input type="text" class="form-control" id="nbSyllabes" placeholder="nombre de syllabes">
+                      <div id="divNbSyllabes" class="input-group-addon after"><i class="fa fa-check" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon before">Max sauvés</div>
+                      <input type="text" class="form-control" id="nbEnregistrements" placeholder="nombre d'enregistrement max">
+                      <div id="divNbEnregistrements" class="input-group-addon after"><i class="fa fa-check" aria-hidden="true"></i></div>
+                    </div>
+                </div>
+            </li>
+            <li class="save">
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                  <div class="btn-group" role="group">
+                    <button id="buttonList" type="button" onclick="loadList()" class="btn btn-default btn-default" data-toggle="modal" data-target="#syllabeUsed"><i class="fa fa-list" aria-hidden="true"></i></button>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <button type="button" onclick="indexSyllabeSaved=0;selectSyllabe();" class="btn btn-default btn-primary" data-toggle="modal" data-target="#save"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                  </div>
+                </div>
+            </li>
+            <li class="toggleton" id="toggle1">
+                <input autocomplete="off" data-toggle="toggle" data-height="35" data-width="60" type="checkbox" data-on="OUI" data-off="NON"> &nbsp; Réponses ?
+            </li>
+            <li class="toggleton" id="toggle5">
+                <input autocomplete="off" data-toggle="toggle" data-height="35" data-width="60" type="checkbox" data-on="OUI" data-off="NON"> &nbsp; Traduction ?
+            </li>
+            <li class="toggleton" id="toggle3">
+                <input checked autocomplete="off" data-toggle="toggle" data-height="35" data-width="60" type="checkbox" data-on="OUI" data-off="NON"> &nbsp; Raccourcis ?
+            </li>
+            <li class="toggleton" id="toggle2">
+                <input autocomplete="off" data-toggle="toggle" data-height="35" data-width="60" type="checkbox" data-on="OUI" data-off="NON"> &nbsp; Sauvegarde ?
+            </li>
+            <li class="toggleton hidden" id="toggle7">
+                <input checked autocomplete="off" data-toggle="toggle" data-height="35" data-width="60" type="checkbox" data-on="OUI" data-off="NON"> &nbsp; Syllabes ?
+            </li>
+            <li class="toggleton hidden" id="toggle4">
+                <input autocomplete="off" data-toggle="toggle" data-height="35" data-width="60" type="checkbox" data-on="OUI" data-off="NON"> &nbsp; Inconnues ?
+            </li> 
+            <li class="toggleton hidden" id="toggle6">
+                <input autocomplete="off" data-toggle="toggle" data-height="35" data-width="60" type="checkbox" data-on="OUI" data-off="NON"> &nbsp; Bruits ?
+            </li>
+            <!-- Informations -->
+            <li class="toggleton">
+                <a id="help" class="floatButton" data-toggle="modal" data-target="#myModal"><i class="fa fa-info" aria-hidden="true"></i></a>
+            </li>
+        </ul>
+    </nav>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <div class="row row-eq-height">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 colCanvas">
+                <div class="zoom" id="plus">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </div>
+                <div class="zoom" id="minus">
+                    <i class="fa fa-minus" aria-hidden="true"></i>
+                </div>
+                <div id="zoomValue">
+                    x1.0
+                </div>
+                <div class="zoom" id="plusContrast">
+                    <i class="fa fa-sun-o" aria-hidden="true"></i>
+                </div>
+                <div class="zoom" id="minusContrast">
+                    <i class="fa fa-moon-o" aria-hidden="true"></i>
+                </div>
+                <div id="contrastValue">
+                    x1.0
+                </div>
+                <canvas id="canvas"></canvas>
+            </div>
+        </div>
+        <div class="row row-eq-height">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">           
+                  <div class="table-responsive">
+                      <table id="tablo" class="table">
+                        <thead>
+                          <tr>
+                            <th></th>
+                            <th>Syllabe</th>
+                            <th>fréquence moyenne</th>
+                            <th>fréquence minimum</th>
+                            <th>fréquence maximum</th>
+                            <th>intensité moyenne</th>
+                            <th>intensité minimum</th>
+                            <th>intensité maximum</th>
+                            <th>durée</th>
+                            <th>ratio (harm.)</th>
+                            <th>ratio (ZC.)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><i class='fa fa-asterisk' aria-hidden='true'></i></td>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+        <div class="row row-eq-height">
+            <div id="testMP3">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h2 id="translation"></h2>
+                <h3 id="context"></h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sources audio -->
+    <div id="sourcesAudio">
+        <audio id="CALL">
+            <source src="sound/distance.wav">
+            <!--<source src="sound/distance.mp3">-->
+        </audio>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Informations</h4>
+                </div>
+                <div class="modal-body">
+                <p>Cette application est dédiée à l'étude des cris du diamant mandarin, en temps réel. Si l'analyse permet de classifier le cri de l'oiseau, l'application peut lui répondre.</p>
+                <p>Afin de traiter ce problème, nous nous basons sur les valeurs suivantes : </p>
+                    <ul>
+                        <li>intensité de cri moyenne (ZF) : <span id="meanAmplitudeZF">NaN</span></li>
+                        <li>durée de cri minimum (ZF) : <span id="minDurationZF">NaN</span></li>
+                        <li>durée de cri maximum (ZF) : <span id="maxDurationZF">NaN</span></li>   
+                        <li>seuil de reconnaissance des syllabes : <span id="seuilProbabilité">NaN</span></li>
+                        <li>seuil des harmoniques : <span id="seuilHarmoniques">NaN</span></li>
+                    </ul>
+                <p>Nous utilisons égalements les paramètres suivants : </p>
+                    <ul>
+                        <li>Paramètres relatifs à la transformée rapide de Fourier (FFT de la Web audio API) : </li>
+                        <ul>
+                            <li><strong>SampleRate :</strong> 44100 Hz</li>
+                            <li><strong>Taille mémoire tampon :</strong> 1024</li>
+                            <li><strong>Echantillonage :</strong> 44100 Hz / 1024 = 43 Hz</li>
+                        </ul>
+                        <li>Exploitation du domaine fréquentiel (<i><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/getByteFrequencyData">getByteFrequencyData()</a></i>): </li>
+                        <ul>
+                            <li><strong>Fréquence Moyenne :</strong> moyenne de toutes les fréquences retournées par la FFT (en prenant en compte l'exploitation de chacune).</li>
+                            <li><strong>Fréquence Minimum :</strong> minimum de toutes les fréquences exploitées et retournées par la FFT.</li>
+                            <li><strong>Fréquence Maximum :</strong> maximum de toutes les fréquences exploitées et retournées par la FFT.</li>
+                        </ul>
+                        <li>Exploitation du domaine temporel (<i><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/getFloatTimeDomainData">getFloatTimeDomainData()</a></i>): </li>
+                        <ul>
+                            <li><strong>Intensité Moyenne :</strong> moyenne de toutes les intensités retournées par la FFT.</li>
+                            <li><strong>Intensité Minimum :</strong> minimum de toutes les intensités retournées par la FFT.</li>
+                            <li><strong>Intensité Maximum :</strong> maximum de toutes les intensités retournées par la FFT.</li>
+                            <li><strong>Zero-crossing (ratio) :</strong> Logarithme décimal du nombre de fois où le signal "passe par 0" (soit égal 128, car signal sous 256 bits).</li>
+                        </ul>
+                        <li>Calculs exploitant les deux domaines : </li>
+                        <ul>
+                            <li><strong>Ratio Harmoniques : </strong> nombre moyen d'harmoniques calculés à partir des valeurs suivantes (une harmonique est définie par une épaisseur noir, un espace blanc qui la sépare des autres ; la distinction entre le noir et le blanc se fait via un seuil de couleur noire) : </li>
+                            <ul>
+                                <li>seuil d'espaces noires : <span id="seuilNbNoir">NaN</span></li>
+                                <li>seuil d'espaces blancs : <span id="seuilNbBlanc">NaN</span></li>
+                                <li>seuil de couleur noire : <span id="seuilNoir">NaN</span></li>
+                            </ul>
+                        </ul>
+                        <li>Calculs indépendants de la Web Audio API : </li>
+                        <ul>
+                            <li><strong>Durée :</strong> différence de deux dates créées au début et à la fin de chaque syllabe (de l'ordre de la ms)</li>
+                        </ul>
+                        
+                    </ul>
+                <p>Vous trouverez dans les réglages les boutons suivants : </p>
+                     <ul>
+                        <li><strong>Fréquence max.</strong> <i>, permet de spécifier la fréquence maximum d'écoute</i></li>          
+                        <li><strong>Amplitude max.</strong> <i>, permet de spécifier l'amplitude d'écoute maximum</i></li>
+                        <li><strong>Probabilité</strong> <i>, permet de spécifier le seuil de reconnaissance minimum</i></li>       
+                        <li><strong>Lignes</strong> <i>, permet de spécifier le nombre de lignes d'affichage</i></li>
+                        <li><strong>Max sauvés</strong> <i>, permet de spécifier le nombre d'enregistrements maximum à effectuer'</i></li>
+                        <br>
+                        <li><strong>Réponses ?</strong> <i>Si ON, l'application répond aux cris de l'oiseau</i></li>
+                        <li><strong>Traduction ?</strong> <i>Si ON, l'application affiche la traduction et le contexte des syllabes reconnues</i></li>
+                        <li><strong>Raccourcis ?</strong> <i>Si ON, vous disposez des raccourcis de l'application</i></li>
+                        <ul>
+                            <li><strong>Play/Pause : </strong><i> touche espace</i></li>
+                            <li><strong>Mute ON/OFF : </strong><i> touche m</i></li>
+                            <li><strong>Appel manuel : </strong><i> touche c</i></li>
+                            <li><strong>Graph ON/OFF : </strong><i> touche g</i></li>
+                        </ul>
+                        <li><strong>Sauvegarde ?</strong> <i>Si ON, l'application stocke en mémoire tous les sons reconnus comme syllabes</i></li>
+                        <ul>
+                            <li><strong>Syllabes ?</strong> <i>Si ON, l'application permet la sauvegarde des syllabes</i></li>
+                            <li><strong>Inconnues ?</strong> <i>Si ON, l'application permet la sauvegarde des sons non classifiés (???)</i></li>
+                            <li><strong>Bruits ?</strong> <i>Si ON, l'application permet la sauvegarde des bruits</i></li>
+                        </ul>
+                    </ul>
+                <hr>
+                <p>L'application permet de garder en mémoire des syllabes enregistrées. On peut ainsi les écouter, les analyser et avoir un accès rapide directement depuis l'application sur son historique. Les boutons suivants sont à votre disposition :</p>
+                    <ul>
+                        <li><strong>ajouter la syllabe</strong> <i>représenté par un icône "plus" et permettant d'ajouter une nouvelle syllabe</i></li>
+                        <li><strong>syllabe suivante</strong> <i>représenté par un icône "random" et permettant de couper ou de lancer l'analyse sonore</i></li>
+                        <li><strong>supprimer les données</strong> <i>représenté par un icône "poubelle" et permettant de supprimer toutes les données mémorisées</i></li>
+                        <li><strong>moyenne de la sélection</strong> <i>représenté par un icône "x²" et permettant de calculer la moyenne et l'écart type de la sélection</i></li>
+                        <li><strong>inverser la sélection</strong> <i>représenté par un icône "checkbox" et permettant de d'inverser toute la sélection</i></li>
+                        <li><strong>décompresser la sélection</strong> <i>représenté par un icône "flèche vers le bas" et permettant l'écoute et le téléchargement des sons mémorisés</i></li>
+                        <li><strong>export excel</strong> <i>représenté par un icône "disquette" et permettant de copier un script pour l'export excel</i></li>
+                        <li><strong>télécharger tous les sons</strong> <i>représenté par un icône "download" et permettant de télécharger une seule bande sons avec toutes les syllabes concaténées</i></li>
+                        <li><strong>mute</strong> <i>représenté par un icône "microphone" et permettant de couper le gain du microphone (touche m)</i></li>
+                    </ul>
+                <hr>
+                <p>L'application permet de créer des syllabes suite à une écoute. Cet outil permet d'ajouter des filtres à notre analyse, en prenant en compte la signature vocale de chaque individu. Les boutons suivants sont à votre disposition :</p>
+                    <ul>
+                        <li><strong>Vérifier les enregistrements sonores.</strong> <i> permettant d'afficher les syllabes n'ayant pas de bande sonore enregistrée à leur nom. Si aucun enregistrement n'est relié, la réponse manuelle au cri d'un oiseau est impossible.</i></li>
+                        <li><strong>réinitialiser</strong> <i>représenté par un icône "flèche" et permettant de réinitialiser les syllabes enregistrées avec toutes les sauvegardes qui ont jamais été créées</i></li>
+                        <li><strong>supprimer les syllabes non séléctionnées</strong> <i>représenté par un icône "poubelle" et permettant de supprimer toutes les syllabes non séléctionnées. Elles restent néanmoins en mémoire de l'application et sont de nouveau accessibles avec le bouton précédent</i></li>
+                    </ul>
+                <hr>
+                    <p>Certaines données sont stockées dans votre navigateur pour y accéder à chaque session. Si vous le souhaitez, vous pouvez les supprimer en cliquant sur le bouton suivant. Une fois supprimées, ces valeurs seront définitivement perdues.</p>
+                    <center><button style="width:50%;" onclick="$('#myModal').modal('hide');$('#deleteALL').modal('show');" type="button" class="btn btn-danger">Supprimer toutes les données</button></center>
+                <hr>
+                    <p>Si vous activez la réponse automatique, la réponse est une copie du cri qui la déclenche ; si vous activez la réponse manuelle, la réponse émise correspond à un enregistrement sonore stocké dans le répértoire <i>"application/sound/..."</i> de l'application et portant un nom identique à celui de la syllabe en question.</p>
+                    <p>La durée en ms correspond au temps de latence entre la reconnaissance d'un cri et l'émission d'une réponse.</p>
+                    <p>Pour pouvoir utiliser la réponse automatique et manuelle, pensez à <strong>activer</strong> les réponses dans l'onglet des réglages principaux.</p>
+                    <center><button onclick="toggleAutomaticAnswer(this);" type="button" class="btn btn-success btn_perso btn_top">Réponse automatique activée</button></center>
+                    <center>
+                        <div id="automaticSettings" class="btn-group btn-group-justified btn_perso btn_bottom" role="group" aria-label="...">
+                          <div class="btn-group" role="group">
+                            <button type="button" onclick="setAutoValue(false);" class="btn btn-default btn-default"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                          </div>
+                          <div class="btn-group" role="group">
+                            <button id="autoValue" type="button" class="btn btn-default btn-default">0</button>
+                          </div>
+                          <div class="btn-group" role="group">
+                            <button type="button" onclick="setAutoValue(true);" class="btn btn-default btn-default"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                          </div>
+                        </div>
+                    </center>
+                <hr>
+                <p style="text-align:center;font-size:0.8em;">Cette application a été développée par <a href="https://fr.linkedin.com/in/william-boffy-2994a3ba" target="_blank">William BOFFY</a> au sein du laboratoire <a href="https://lecd.u-paris10.fr/" target="_blank">LECD</a> de Paris 10 Nanterre. Elle est pleinement fonctionnelle sous Mozilla Firefox 53.0 (32 bits). Pour toute question de code ou de fonctionnement, contactez-moi via l'adresse email suivante <i>williamboffy@hotmail.fr</i> !</p>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="delete" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Supprimer toutes les données sauvegardées ?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Une fois supprimées, les valeurs seront définitivement perdues. Êtes-vous sûr(e) ?</p>
+                </div>
+                <div class="modal-footer">
+                    <span style="margin-right:5px;" id="buttonDelete" ></span>
+                    <button data-toggle="tooltip" data-placement="bottom" title="supprimer les données" type="button" class="btn btn-danger" onclick="deleteDatas()"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                    <button data-toggle="tooltip" data-placement="bottom" title="fermer" type="button" class="btn btn-default" onclick="$('#delete').modal('hide');$('#save').modal('show');"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="save" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 id="nbDataSaved" class="modal-title">Aucune syllabe n'a encore été sauvegardée..</h4>
+                </div>
+                <div class="modal-body">          
+                          <div class="table-responsive">
+                              <table id="tabloSaved" class="table">
+                                <thead>
+                                  <tr>
+                                    <th></th>
+                                    <th>Son</th>
+                                    <th>Syllabe</th>
+                                    <th>fréquence moyenne</th>
+                                    <th>fréquence minimum</th>
+                                    <th>fréquence maximum</th>
+                                    <th>intensité moyenne</th>
+                                    <th>intensité minimum</th>
+                                    <th>intensité maximum</th>
+                                    <th>durée</th>
+                                    <th>ratio (harm.)</th>
+                                    <th>ratio (ZC.)</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+                <br>
+                <div class="modal-footer">
+                    <textarea id="excelExport"></textarea>
+                    <span style="margin-right:5px;" id="buttonSave" ></span> 
+                    <button data-toggle="tooltip" data-placement="bottom" title="ajouter la syllabe" type="button" class="btn btn-success" onclick="addNewKindOfSyllabe()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                    <button data-toggle="tooltip" data-placement="bottom" title="syllabe suivante" type="button" class="btn btn-warning" onclick="selectSyllabe()"><i class="fa fa-random" aria-hidden="true"></i></button>
+                    <button onclick="$('#save').modal('hide');$('#delete').modal('show');" data-toggle="tooltip" data-placement="bottom" title="supprimer les données" type="button" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button> 
+                    <button data-toggle="tooltip" data-placement="bottom" title="moyennes de la sélection" type="button" class="btn btn-primary" onclick="computeMean()"><i class="fa fa-superscript" aria-hidden="true"></i></button>
+                    <button data-toggle="tooltip" data-placement="bottom" title="inverser la sélection" type="button" class="btn btn-primary" onclick="allCheck()"><i class="fa fa-check-square ok" aria-hidden="true"></i></button>
+                    <button data-toggle="tooltip" data-placement="bottom" title="décompresser la sélection" type="button" class="btn btn-primary" onclick="allDown()"><i class="fa fa-caret-square-o-down" aria-hidden="true"></i></button>
+                    <button data-toggle="tooltip" data-placement="bottom" title="export excel" type="button" class="btn btn-primary" onclick="saveDatas()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>    
+                    <button onclick="downloadAll()" data-toggle="tooltip" data-placement="bottom" title="télécharger tous les sons" type="button" class="btn btn-default"><i class='fa fa-download' aria-hidden='true'></i></button>     
+                    <button onclick="mute.click();" data-toggle="tooltip" data-placement="bottom" title="mute" type="button" class="btn btn-default"><i class="fa fa-microphone" aria-hidden="true"></i></button>    
+                    <button data-toggle="tooltip" data-placement="bottom" title="fermer" type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="syllabeUsed" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Liste des syllabes enregistrées</h4>
+                </div>
+                <div class="modal-body" id="listSyllabe">
+                    
+                </div>
+                <div class="modal-footer" id="syllabesSongs">
+                    <center><button onclick='isSongUpload()' type="button" class="btn btn-primary">Vérifier les enregistrements sonores.</button></center>
+                </div>
+                <div class="modal-footer">
+                    <button onclick='refreshSyllabes()' data-toggle="tooltip" data-placement="bottom" title="reinitialiser" type="button" class="btn btn-primary"><i class="fa fa-undo" aria-hidden="true"></i></button>
+                    <button onclick='deleteSyllabes()' data-toggle="tooltip" data-placement="bottom" title="supprimer les syllabes non sélectionnées" type="button" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                    <button data-toggle="tooltip" data-placement="bottom" title="fermer" type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+                    
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="modal fade" id="modifyFilters" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="titleFilters">Modification des valeurs</h4>
+                </div>
+                <div class="modal-body" id="listFilters">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button data-toggle="tooltip" data-placement="bottom" title="fermer" type="button" class="btn btn-default" onclick="$('#modifyFilters').modal('hide');$('#buttonList').click();"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <div class="modal fade" id="deleteALL" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Êtes-vous certain de poursuivre cette action ?</h4>
+                </div>
+                <div class="modal-body">
+                    En poursuivant, vous perdrez toutes les syllabes qui ont été sauvegardées. Vous ne pourrez plus revenir en arrière.
+                    <center><button onclick="cleanAll()" data-toggle="tooltip" data-placement="bottom" title="tout supprimer" type="button" class="btn btn-danger">Supprimer toutes les données</button></center>                  
+                </div>
+                <div class="modal-footer">
+                    <button data-toggle="tooltip" data-placement="bottom" title="fermer" type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="syllabeAdd" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ajout d'une syllabe</h4>
+                </div>
+                <div class="modal-body">
+                    <p><i>Pensez à mettre à disposition un fichier audio (.mp3 ou .wav) correspondant à cette nouvelle syllabe dans le répertoire de l'application prévu à cet effet (par exemple ./sound/syllabe.mp3). <strong>Le fichier audio doit porter excatement le même nom que la syllabe.</strong></i></p><hr>
+                    <form>
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                          <input autocomplete="off" id="nameInput" value="MA_SYLLABE" type="text" class="form-control" placeholder="Nom de la syllabe" aria-describedby="basic-addon1">
+                        </div><br>
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                          <input autocomplete="off" id="translationInput" value="" type="text" class="form-control" placeholder="Signification de la syllabe" aria-describedby="basic-addon1">
+                        </div><br>
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                          <input autocomplete="off" id="contextInput" value="" type="text" class="form-control" placeholder="Contexte de la syllabe" aria-describedby="basic-addon1">
+                        </div><br>
+                         <div class="form-group">
+                          <label for="listSongs">Vous avez oublié de télécharger une bande son ?</label>
+                          <select class="form-control" id="listSongs">
+                          </select>
+                        </div> 
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-toggle="tooltip" data-placement="bottom" title="ajouter la syllabe" type="button" class="btn btn-success" onclick="createNewKindOfSyllabe()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                    <button data-toggle="tooltip" data-placement="bottom" title="télécharger la bande son" type="button" class="btn btn-default" onclick="downloadSong()"><i class="fa fa-download" aria-hidden="true"></i></button>
+                    <button data-toggle="tooltip" data-placement="bottom" title="fermer" type="button" class="btn btn-default" onclick="$('#syllabeAdd').modal('hide');$('#save').modal('show');"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    
+    <!-- MP3 ENCODER -->
+    <script>
+        // default path is on the same directory as this HTML
+        Mp3LameEncoderConfig = {
+          memoryInitializerPrefixURL: "mp3-encoder/lib/"   // must end with slash
+          // => changed to mp3-encoder/lib/Mp3LameEncoder.min.js.mem
+        };
+    </script>
+    <script src="mp3-encoder/lib/Mp3LameEncoder.min.js"></script>
+    <script src="js/mp3.js"></script>
+    
+    <!-- Toggle Javascript -->
+    <script src="js/toggle.js"></script>
+    
+    <!-- Variables Javascript -->
+    <script src="js/variables.js"></script>
+    
+    <!-- Saved -->
+    <script src="js/saved.js"></script>
+    
+    <!-- Chargement des Classes -->
+    <script src="js/syllabes_class.js"></script>
+    <script src="js/storage_class.js"></script>
+    
+    <!-- Déclaration des Syllabes -->
+    <script src="js/syllabes.js"></script>
+    
+    <!-- Déclaration des Bruits -->
+    <script src="js/noises.js"></script>
+    
+    <!-- Enregistrement et selection des Syllabes -->
+    <script src="js/sauvegarde.js"></script>
+    
+    <!-- Canvas Javascript -->
+    <script src="js/canvas.js"></script>
+    
+    <!-- Sound Javascript -->
+    <script src="js/visuals.js"></script>
+    
+    <!-- Sound Javascript -->
+    <script src="js/sound.js"></script>
+    
+    <!-- Actions Javascript -->
+    <script src="js/actions.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+    // Scrolls to the selected menu item on the page
+    $(function() {
+        $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function() {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                }
+            }
+        });
+    });
+    //#to-top button appears after scrolling
+    var fixed = false;
+    $(document).scroll(function() {
+        if ($(this).scrollTop() > 250) {
+            if (!fixed) {
+                fixed = true;
+                // $('#to-top').css({position:'fixed', display:'block'});
+                $('#to-top').show("slow", function() {
+                    $('#to-top').css({
+                        position: 'fixed',
+                        display: 'block'
+                    });
+                });
+            }
+        } else {
+            if (fixed) {
+                fixed = false;
+                $('#to-top').hide("slow", function() {
+                    $('#to-top').css({
+                        display: 'none'
+                    });
+                });
+            }
+        }
+    });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,433 @@
+.form-group .input-group{
+    margin-left : 5%;
+    margin-right : 5%;
+}
+
+.input-group-addon{
+    padding:0 5px 0 5px;
+    text-align:center;
+}
+
+.input-group .before{
+    margin: 0 5px 0 5px;
+    white-space: normal;
+}
+
+.input-group .after{
+    margin: 0 5px 0 5px;
+}
+
+.input-group .middle{
+    margin: 0 5px 0 5px;
+    height:34px;
+    border: solid darkgray 1px;
+}
+
+.form-control{
+    height:100%;
+}
+
+.input-group .middle:hover{
+    color: #898989;
+    cursor: pointer;
+}
+
+.input-group .middle:active {
+    color: #C1C1C1;
+    background-color: #D1D1D1;
+    cursor: pointer;
+}
+
+.input-group .after:hover{
+    color: #02CE6C;
+    cursor: pointer;
+}
+
+.input-group .after:active {
+    color: #02CE6C;
+    background-color: #D1D1D1;
+    cursor: pointer;
+}
+
+.radio{
+    margin:0;
+    padding:0;
+    color:white !important;
+}
+
+.radio input{ 
+    position:static !important;
+    padding:0 5px 0 5px;
+    text-indent: 0px;
+    margin:0px 0px 0px 20px !important;
+}
+
+.form-group span{
+    color:white;
+    margin:0;
+    padding:0;
+}
+
+.sidebar-nav li{
+    line-height: 0px;
+}
+
+.toggleton{
+    text-indent:1px !important;
+    margin:0;
+    padding:0;
+    margin-bottom: 12px;
+    color:white;
+}
+
+.toggleton .toggle.btn{
+    margin:0 0 0 12px;
+    background-color:#e6e6e6;
+}
+
+.form-group{
+    text-indent:1px;
+}
+
+.floatButton{
+    color:white;
+    position:absolute;
+    z-index: 2;
+    background-color: rgba(0,0,0,0.4);
+    padding:0;
+    margin:0;
+    height:45px;
+    width:50px;
+    position:fixed;
+    color:white;
+    cursor:pointer;
+}
+
+#menu-toggle{
+    z-index:2;
+}
+
+.floatButton i{
+    position: absolute;
+    text-indent: 0px;
+    top: 55%; /* poussé de la moitié de hauteur du référent */
+    left: 50%; /* poussé de la moitié de hauteur du référent */
+    transform: translateY(-50%) translateX(-50%); /* tiré de la moitié de sa propre hauteur */
+    color:white;
+}
+
+.floatButton:hover{
+    background-color: rgba(0,0,0,0.7);
+}
+
+.mute{
+    top:5px;
+    left:5px;    
+}
+
+.floatButtonOFF i{
+    color:darkred;
+}
+
+.play{
+    top:55px;
+    left:5px;      
+}
+
+.graph{
+    top:105px;
+    left:5px;      
+}
+
+.call{
+    top:155px;
+    left:5px;      
+}
+
+body{
+    background-color:white;
+    padding:0;
+    margin:0;
+}
+
+.container{
+    padding:0;
+    margin:0;
+    width:100%;
+    text-align:center;
+    background-color: white;
+}
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+
+.container .row:nth-child(even){
+    background-color:#FAFAFA;
+    text-align:center;
+}
+
+.toggleton .btn{
+    border:none;
+}
+
+.form-group .input-group .input-group-addon{
+    border:none;
+}
+
+.margeTop{
+    width:100%;
+    height:55px;
+    background-color:#337ab7;
+    position:absolute;
+    position:fixed;
+    z-index:1;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+} 
+
+.hide {
+  display: none;
+}
+
+.container{
+    padding-top:54px;
+}
+
+#mute{
+    top:5px;
+    left:5px;
+}
+
+#play{
+    top:5px;
+    left:60px;
+}
+
+#graph{
+    top:5px;
+    left:115px;
+}
+
+#call{
+    top:5px;
+    left:170px;
+}
+
+#help{
+    right:57px;
+    top:5px;
+    background-color: #337ab7;
+    opacity:1;
+}
+
+#help:hover{
+    opacity:0.8;
+}
+
+canvas{
+    display:block;
+    background-color:white;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.row{
+    width:100%;
+    padding:0;
+    margin:0;
+}
+
+.colCanvas{
+    width:100%;
+    padding:0;
+    margin:0;   
+}
+
+.table{
+    text-align:left;
+}
+
+.zoom{
+    position:absolute;
+    right:5px;
+    top:5px;
+    padding : 0;
+    margin:0px;
+    background-color:rgba(0,0,0,0.2);
+    color:white;
+    width:20px;
+    height:20px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.zoom i{
+    text-indent: 0px;
+    margin:0px;
+    padding:0px;
+}
+
+#plus{
+    top:5px;
+}
+
+#minus{
+    top:30px;
+}
+
+#plusContrast{
+    top:5px;
+    right:30px;
+    color:darkorange;
+}
+
+#minusContrast{
+    top:30px;
+    right:30px;
+    color:darkslateblue;
+}
+
+#zoomValue{
+    position:absolute;
+    padding : 0;
+    margin:0;
+    background-color:rgba(0,0,0,0.2);
+    color:white;
+    width:40px;
+    height:20px;
+    text-align:center;
+    bottom:5px;
+    right:5px;
+}
+
+#contrastValue{
+    position:absolute;
+    padding : 0;
+    margin:0;
+    background-color:rgba(0,0,0,0.2);
+    color:white;
+    width:40px;
+    height:20px;
+    text-align:center;
+    bottom:30px;
+    right:5px;
+}
+
+.zoom:hover{
+    background-color:rgba(0,0,0,0.4);  
+}
+
+.save{
+    margin-left: 13px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    width:224px;
+}
+
+#save .modal-content{
+    width:100%;
+    margin:0;
+}
+#save{
+    margin:0;
+    padding:0;
+}
+
+#tabloSaved{
+    text-align: right;
+}
+
+#tabloSaved th{
+    text-align: right;    
+}
+
+#tabloSaved i:hover{
+    cursor:pointer;
+}
+
+.playSave{
+    margin:0;
+    padding:0;
+}
+
+#excelExport{
+    opacity:0;
+    width:1px;
+    height:1px;
+}
+
+.marginLeft{
+    margin-left:35px;
+}
+
+.filterList:hover{
+    color:cornflowerblue;
+    cursor:pointer;
+}
+
+.filterList:active{
+    opacity:0.5;
+}
+
+.desactived{
+    text-decoration: line-through;
+    opacity:0.6;
+}
+
+.checkedSyllabe{
+    cursor:pointer;
+}
+
+.syllabeDesactived{
+    opacity:0.4;
+}
+
+.btn_perso{
+    width:50%;    
+}
+
+.btn_top{
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.btn_bottom .btn{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+/*
+ * Smartphones
+ */
+@media only screen and (max-width : 768px){
+    #save button{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    
+    #zoomValue{
+        opacity:0;
+    }
+}
+
+/*
+ * Tablettes
+ */
+@media only screen and (max-width : 992px){
+
+}
+
+/*
+ * Medium devices
+ */
+@media only screen and (max-width : 1200px){
+    
+}
